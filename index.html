@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flex Header</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Rock Paper Scissors</title>
   </head>
   <body>
   <script>
@@ -47,6 +46,7 @@
         //} 
        return userChoice; 
     }
+    /*
     // Testing if the output is random *DELETE LATER*
     let yes = 0; 
     while(yes != 10){
@@ -54,7 +54,7 @@
         console.log(getUserChoice()); 
         yes++; 
     }
-    
+    */
     /* 2. Write function playRound that plays a single round of
         Rock Paper Scissors. 
             function should take two parameters 
@@ -65,9 +65,18 @@
        "You Lose! Paper beats Rock"
        Make your function’s playerSelection parameter 
        case-insensitive */
-    function playRound(pS, cS){
-
+    function playRound(uS, cS){
+        
+        if (uS == cS){return ("It's a tie ");}
+        else if(uS == "rock" && cS == "paper"){return ("Computer wins!");}
+        else if (uS == "scissors" && cS == "paper"){return ("User wins!");}
+        else if(uS == "rock" && cS == "scissors"){return ("User wins!");}
+        else if (uS == "paper" && cS == "scissors"){return ("Computer wins!");}
+        else if(uS == "paper" && cS == "rock"){return ("User wins!");}
+        else if (uS == "scissors" && cS == "rock"){return ("Computer wins!");}
+        else return ("IDK");
     }
+    
     /*3. Write a NEW function called game(). Call the 
        playRound function inside of this one to play
        a 5 round game that keeps score and reports a 
@@ -83,6 +92,24 @@
     Use prompt() to get input from the user. Read the docs here if you need to.
     Feel free to re-work your previous functions if you need to. Specifically, you might want to change the return value to something more useful.
     Feel free to create more “helper” functions if you think it would be useful.*/
+    function game (){
+        let compPoint =0; // holds point for computer
+        let userPoint = 0; // holds point for user
+        let cS;        // Holds computer selection
+        let uS;        // Holds user selection
+        let winner;    // holds who won the round
+        for (let i = 0; i < 5; i++) {
+            uS = getUserChoice();       // call getuser
+            cS = getComputerChoice();   // call getcomp
+            winner = playRound(uS,cS);               // call one round
+            if (winner == "Computer wins!") {compPoint++;}
+            else if(winner == "User wins!") {userPoint++;}
+            console.log("User choice: " + uS + " Computer Choice: " + cS + "\n|| Points --> User: " + userPoint + " Comp: " + compPoint);
+        }
+        if(userPoint > compPoint){return "User Wins"}
+        else {return "Computer wins"}
+    }
+    console.log(game()); 
 
   </script>
   </body>
